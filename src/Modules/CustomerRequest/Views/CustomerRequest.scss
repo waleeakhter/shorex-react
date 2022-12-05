@@ -1,0 +1,20 @@
+.remotetop-bar {
+    @media screen and (max-width:767px){
+        margin-top: 2rem;
+    }
+    >div {
+        @media screen and (max-width:767px){
+            flex: 1;
+        }
+        &:first-of-type {
+            @media (min-width: 768px) {
+                button {
+                    position: absolute;
+                    width: 150px;
+                    right: -100%;
+                    margin-right: 170px;
+                }
+            }
+        }
+    }
+}

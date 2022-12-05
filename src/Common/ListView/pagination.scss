@@ -1,0 +1,102 @@
+.p-paginator {
+    padding: 0;
+    margin-top: 40px;
+
+    >button {
+        border: 1px solid #EBEDEF !important;
+
+        &:first-of-type {
+            border-radius: 3px 0 0 3px;
+            border-right: 0 !important;
+        }
+
+        &:last-of-type {
+            border-radius: 0 3px 3px 0;
+            border-left: 0 !important;
+        }
+    }
+
+    button {
+        margin: 0 !important;
+        height: 33px !important;
+        width: 33px !important;
+        min-width: 33px !important;
+        color: #39414F !important;
+        font-size: 16px;
+        font-weight: 600;
+
+        &:focus {
+            box-shadow: none
+        }
+    }
+
+    .p-paginator-pages {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #EBEDEF;
+        height: 33px;
+        overflow: hidden;
+
+        >button {
+            border-radius: 0 !important;
+            height: 100% !important;
+
+            &.p-highlight {
+                background: #3399FF !important;
+                border-color: #3399FF !important;
+                color: #fff !important;
+            }
+
+            :not(:last-child) {
+                border-right: 1px solid #EBEDEF !important;
+            }
+        }
+    }
+
+    .p-dropdown {
+        order: 1;
+        margin-left: 0;
+        width: 127.96px;
+        height: 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: none !important;
+        background-color: #fff;
+        color: #1D1D1D;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid #E4E9F3 !important;
+        font-size: 14px;
+        font-weight: 500;
+
+        &:focus,
+        &:hover {
+            background-color: var(--green) !important;
+            color: #FFFFFF !important;
+
+            .p-dropdown-trigger-icon,
+            .p-dropdown-label {
+                color: #FFFFFF
+            }
+        }
+
+
+    }
+}
+
+.p-dropdown-panel {
+    margin: 5px 0 -5px;
+    border-radius: 3px;
+
+    .p-dropdown-item {
+        font-size: 14px;
+        font-weight: 500;
+
+        &.p-highlight,
+        &:hover {
+            color: #1D1D1D !important;
+            background-color: #ebedef !important;
+        }
+    }
+}

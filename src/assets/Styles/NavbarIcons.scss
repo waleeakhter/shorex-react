@@ -1,0 +1,137 @@
+.c-sidebar-nav-dropdown {
+    .c-sidebar-nav-dropdown-toggle {
+        i {
+            background-repeat: no-repeat;
+            font-size: 20px;
+
+            &::after {
+                position: absolute;
+                content: "";
+                left: 19px;
+                top: 14px;
+            }
+
+            &.shorexapps-icon {
+                &::after {
+                    background-image: url("./../images/shorexapps.svg");
+                    width: 18.97px;
+                    height: 22.86px;
+                }
+            }
+        }
+    }
+
+    &.c-show,
+    .c-sidebar-nav-dropdown-toggle:hover,
+    .c-sidebar-nav-dropdown-toggle.c-active {
+        i {
+            &.shorexapps-icon {
+                &::after {
+                    background-image: url("./../images/shorexapphover.svg");
+                }
+            }
+        }
+    }
+
+    .c-sidebar-nav-link {
+        gap: 15px;
+
+        i {
+            font-size: 20px;
+            background-repeat: no-repeat;
+
+            &.products-icons {
+                background-image: url("./../images/products.svg");
+                width: 20px;
+                height: 20px !important;
+            }
+
+            &.promotions-icon {
+                background-image: url("./../images/promotions.svg");
+                width: 19.7px;
+                height: 22.69px !important;
+                background-position: center;
+                background-size: cover;
+                transition: all 0.3s;
+            }
+
+            &.managepolicy-icon {
+                background-image: url("./../images/privacy.svg");
+                width: 20px;
+                height: 20px !important;
+                background-size: contain;
+            }
+
+            &.holidays-icon {
+                background-image: url("./../images/holidays.svg");
+                width: 20px;
+                height: 20px !important;
+                background-size: contain;
+                transition: all 0.3s ease-in-out;
+            }
+
+
+
+        }
+
+        &.active,
+        &:hover {
+            color: var(--green) !important;
+
+            i {
+                &.products-icons {
+                    background-image: url("./../images/productshover.svg");
+                }
+
+                &.promotions-icon {
+                    background-image: url("./../images/promotionshover.svg");
+                    transform: rotate(-25deg);
+                }
+
+                &.holidays-icon {
+                    background-image: url("./../images/holidayshover.svg");
+                    transform: rotate(15deg);
+                }
+
+                &.logout-icon {
+                    background-image: url("./../images/logouthover.svg");
+                }
+            }
+
+        }
+    }
+}
+
+.c-sidebar-nav-link {
+    i {
+        width: 20px;
+        height: 20px !important;
+        background-size: contain;
+        transition: all 0.2s ease-in-out;
+        background-repeat: no-repeat;
+        font-size: 20px;
+        background-position: center;
+
+        &.logout-icon {
+            background-image: url("./../images/logout.svg");
+        }
+
+        &.dashboard-icon {
+            background-image: url("./../images/dashboard.svg");
+            transform: rotate(0deg);
+        }
+
+    }
+
+    &.active,
+    &:hover {
+        .logout-icon {
+            background-image: url("./../images/logouthover.svg");
+        }
+
+        .dashboard-icon {
+            background-image: url("./../images/dashboardhover.svg");
+            transform: rotate(-45deg);
+        }
+    }
+}

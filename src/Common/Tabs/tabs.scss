@@ -1,0 +1,15 @@
+.tabBtns{
+    display: flex;
+    gap: 0 70px;
+    span{
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--black);
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+        &.active{
+            color: var(--green);
+        }
+    }
+}
