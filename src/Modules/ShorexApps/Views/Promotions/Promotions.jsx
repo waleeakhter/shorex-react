@@ -4,7 +4,9 @@ import Api from "@evenlogics/whf-api"
 import Style from "./Promotion.module.scss"
 import {Link} from "react-router-dom"
 import { Spinner , Row , Col , Button } from 'react-bootstrap'
-const Promotions = () => {
+import {withTranslation} from 'react-i18next'
+
+const Promotions = (props) => {
     const [data, setData] = React.useState([])
     const [spinner, setSpinner] = React.useState(true)
     React.useEffect(() => {
@@ -20,10 +22,10 @@ const Promotions = () => {
         <>  
            <Row className="align-items-center mb-4">
                <Col sm="6">
-                   <h4 className="heading ">Promotional Banners</h4>
+                   <h4 className="heading ">{props.t('shorex:promotional-banners')}</h4>
                </Col>
                <Col sm="6" className="text-end">
-                  <Link to="promotions/add"><Button variant="success">Add Promotion</Button></Link>
+                  <Link to="promotions/add"><Button variant="success">{props.t('shorex:add-promotion')}</Button></Link>
                </Col>
            </Row>
             {!spinner ?
@@ -37,4 +39,4 @@ const Promotions = () => {
     )
 }
 
-export default Promotions
+export default withTranslation(['base', 'shorex'])(Promotions)

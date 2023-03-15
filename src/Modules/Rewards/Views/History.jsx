@@ -1,45 +1,46 @@
 import React from 'react'
 import RemoteTable from '@evenlogics/whf-remote-table'
 import moment from 'moment'
+import {withTranslation} from 'react-i18next'
+
 const defaultSorted = [{ dataField: 'customer_name', order: 'desc' }]
-const columns = [
-
-    {
-        dataField: 'customer_name',
-        text: 'Customer Name',
-        sort: true,
-
-    },
-    {
-        dataField: 'business_name',
-        text: 'Business Name',
-        sort: true,
-    },
-    {
-        dataField: 'created_at',
-        text: 'Date & Time',
-        sort: true,
-        formatter: (cell) => {
-            const date = new Date(cell);
-            return `${moment(date).format('MMM DD, YYYY')} at ${moment(date).format('hh:ss a')}`
-        }
-    },
-    {
-        dataField: 'redeemed_points',
-        text: 'Gained Points',
-        sort: true,
-        formatter: cell => cell > 0 ? cell : 0
-    },
-    {
-        dataField: 'donate_points',
-        text: 'Donated Points',
-        sort: true,
-        formatter: cell => cell > 0 ? cell : 0
-    }
-]
 
 
 const History = (props) => {
+    const columns = [
+        {
+            dataField: 'customer_name',
+            text: props.t('shorex:customer-name'),
+            sort: true,
+
+        },
+        {
+            dataField: 'business_name',
+            text: props.t('shorex:business-name'),
+            sort: true,
+        },
+        {
+            dataField: 'created_at',
+            text: props.t('shorex:date-time'),
+            sort: true,
+            formatter: (cell) => {
+                const date = new Date(cell);
+                return `${moment(date).format('MMM DD, YYYY')} at ${moment(date).format('hh:ss a')}`
+            }
+        },
+        {
+            dataField: 'redeemed_points',
+            text: props.t('shorex:gained-points'),
+            sort: true,
+            formatter: cell => cell > 0 ? cell : 0
+        },
+        {
+            dataField: 'donate_points',
+            text: props.t('shorex:donated-points'),
+            sort: true,
+            formatter: cell => cell > 0 ? cell : 0
+        }
+    ]
 
     return (
         <div className="History">
@@ -61,4 +62,4 @@ const History = (props) => {
     )
 }
 
-export default History
+export default withTranslation(['base', 'shorex'])(History)

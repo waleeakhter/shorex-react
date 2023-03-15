@@ -1,6 +1,8 @@
 import React from 'react'
 import { Spinner, Alert } from 'react-bootstrap'
 import CommonCard from "./../../../../Common/CommonCardView/CommonCard"
+import {withTranslation} from 'react-i18next'
+
 const DriverList = ({ drivers, view, spinner }) => {
   const [driversList, setDrivers] = React.useState(undefined)
   React.useEffect(() => {
@@ -24,7 +26,7 @@ const DriverList = ({ drivers, view, spinner }) => {
               )}
             </div>
             : <Alert className="mt-5 fs-6" variant={'danger'}>
-              No Data Found <i className="fa-solid fa-diamond-exclamation"></i>
+                {props.t('shorex:no-data-found')} <i className="fa-solid fa-diamond-exclamation"></i>
             </Alert>
         )
 
@@ -33,4 +35,4 @@ const DriverList = ({ drivers, view, spinner }) => {
   )
 }
 
-export default DriverList
+export default withTranslation(['base', 'shorex'])(DriverList)

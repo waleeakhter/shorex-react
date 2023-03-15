@@ -7,18 +7,19 @@ import Vehicles from './Vehicle/Vehicles'
 import Warehouses from './Warehouses/Warehouses'
 import Drivers from './Drivers/Drivers'
 import Storekeeper from './Storekeeper/Storekeeper'
-import DataEntryStaff from './DataEntryStaff/DataEntryStaff'
+// import DataEntryStaff from './DataEntryStaff/DataEntryStaff'
+import {withTranslation} from 'react-i18next'
 
-const ReportsTabs = () => {
+const ReportsTabs = (props) => {
     const tabs = [
-        { name: 'Available Stock', component: <Stock /> },
-        { name: 'Customer', component: <Customer /> },
-        { name: 'Rewards', component: <Rewards /> },
-        { name: 'Vehicle', component: <Vehicles /> },
-        { name: 'Warehouses', component: <Warehouses /> },
-        { name: 'Drivers', component: <Drivers /> },
-        { name: 'Storekeeper', component: <Storekeeper /> },
-        { name: 'Data Entry Staff', component: <DataEntryStaff /> },
+        { name: props.t('shorex:available-stock'), component: <Stock /> },
+        { name: props.t('shorex:customer'), component: <Customer /> },
+        { name: props.t('shorex:rewards'), component: <Rewards /> },
+        { name: props.t('shorex:vehicle'), component: <Vehicles /> },
+        { name: props.t('shorex:warehouses'), component: <Warehouses /> },
+        { name: props.t('shorex:drivers-vehicles'), component: <Drivers /> },
+        { name: props.t('shorex:storekeeper'), component: <Storekeeper /> },
+        // { name: props.t('shorex:data-entry-staff'), component: <DataEntryStaff /> },
 
     ]
     const [key, setKey] = React.useState(tabs.at(0).name)
@@ -36,4 +37,4 @@ const ReportsTabs = () => {
     )
 }
 
-export default ReportsTabs
+export default withTranslation(['base', 'shorex'])(ReportsTabs)

@@ -3,7 +3,9 @@ import { toast } from "react-toastify"
 
 export const onSubmit = (values, setSpinner, id, redirect) => {
     console.log(values)
-    setSpinner(true)
+    if(setSpinner){
+        setSpinner(true)
+    }
     const formData = new FormData();
     Object.keys(values).forEach(key => {
         key !== "selection" &&
@@ -14,11 +16,15 @@ export const onSubmit = (values, setSpinner, id, redirect) => {
         .then(response => {
             console.log(response);
             toast.success(response.success)
-            redirect.push("/apps/notifications")
+            if(redirect.push){
+                redirect.push("/apps/notifications")
+            }
         })
         .catch(err => {
             console.log(err)
-            setSpinner(false)
+            if(setSpinner){
+                setSpinner(false)
+            }
         }
         )
 }

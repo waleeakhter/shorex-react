@@ -23,31 +23,31 @@ const filters = {
         name: 'postal_code',
         col: ' col-md-4 col-xxl-2 col-xl-3 col-6 ',
     },
-    
-    oldest: {
+    sort: {
         type: 'advanceSelect',
-        label: 'Oldest',
-        name: 'oldest',
-        col: ' col-md-4 col-xxl-2 col-xl-3 col-6 ',
-        options: [
-            { label : "Last Year" , value: "Last Year "},
-            { label : "Last 2 Years" , value: "Last 2 Years"}
-        ]
-    },
-    newest: {
-        type: 'advanceSelect',
-        label: 'Newest',
-        name: 'newest',
-        col: ' col-md-4 col-xxl-2 col-xl-3 col-6 ',
-        options: [
-            { label : "This Year" , value: "This Year "},
-        ]
-    },
-     date: {
-        type: 'date',
-        label: 'Date Range',
-        name: 'date',
+        label: 'Sort',
+        name: 'sort',
         col: ' col-md-4 col-xxl-3',
+        placeholderText: "DD/MM/YYYY",
+        dateFormat: "dd/MM/yyyy",
+        options: [
+            { value: "id|desc", label: "Newest" },
+            { value: "id|asc", label: "Oldest" }
+        ]
+    },
+    period_from: {
+        type: 'date',
+        label: 'Date Range Start',
+        name: 'period_from',
+        col: ' col-md-4 col-xxl-3',
+        autoComplete: "off"
+    },
+    period_to: {
+        type: 'date',
+        label: 'Date Range End',
+        name: 'period_to',
+        col: ' col-md-4 col-xxl-3',
+        autoComplete: "off"
     },
 }
 

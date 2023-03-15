@@ -1,55 +1,56 @@
 import React from 'react'
 import RemoteTable from '@evenlogics/whf-remote-table'
 import moment from 'moment'
+import {withTranslation} from 'react-i18next'
+
 const defaultSorted = [{ dataField: 'customer_name', order: 'desc' }]
-const columns = [
-
-    {
-        dataField: 'customer_name',
-        text: 'Customer Name',
-        sort: true,
-
-    },
-    {
-        dataField: 'business_name',
-        text: 'Business Name',
-        sort: true,
-    },
-    {
-        dataField: 'product_title',
-        text: 'Items',
-        sort: true,
-    },
-    {
-        dataField: 'quantity',
-        text: 'Quantity',
-        sort: true,
-    },
-    {
-        dataField: 'driver_name',
-        text: 'Driver Name',
-        sort: true,
-    },
-    {
-        dataField: 'created_at',
-        text: 'Date & Time',
-        sort: true,
-        formatter: (cell) => {
-            const date = new Date(cell);
-            return `${moment(date).format('MMM DD, YYYY')} at ${moment(date).format('hh:ss a')}`
-        }
-    },
-
-    {
-        dataField: 'gained_points',
-        text: 'Gained Points',
-        sort: true,
-    },
-
-]
-
 
 const DailyPoints = (props) => {
+    const columns = [
+
+        {
+            dataField: 'customer_name',
+            text: props.t('shorex:customer-name'),
+            sort: true,
+
+        },
+        {
+            dataField: 'business_name',
+            text: props.t('shorex:business-name'),
+            sort: true,
+        },
+        {
+            dataField: 'product_title',
+            text: props.t('shorex:product-title'),
+            sort: true,
+        },
+        {
+            dataField: 'quantity',
+            text: props.t('shorex:quantity'),
+            sort: true,
+        },
+        {
+            dataField: 'driver_name',
+            text: props.t('shorex:driver-name'),
+            sort: true,
+        },
+        {
+            dataField: 'created_at',
+            text: props.t('shorex:date-time'),
+            sort: true,
+            formatter: (cell) => {
+                const date = new Date(cell);
+                return `${moment(date).format('MMM DD, YYYY')} at ${moment(date).format('hh:ss a')}`
+            }
+        },
+
+        {
+            dataField: 'gained_points',
+            text: props.t('shorex:gained-points'),
+            sort: true,
+        },
+
+    ]
 
     return (
         <div className="DailyPoints">
@@ -71,4 +72,4 @@ const DailyPoints = (props) => {
     )
 }
 
-export default DailyPoints
+export default withTranslation(['base', 'shorex'])(DailyPoints)

@@ -25,7 +25,7 @@
         &.list {
             flex: 0 0 450px;
             flex-direction: row;
-            padding: 30px;
+            padding: 12px;
             @media (max-width: 1369px) {
                 flex: 0 0 324px;
                 h1 {
@@ -36,7 +36,7 @@
         &.grid {
             flex-direction: column;
             width: 180px;
-            padding: 30px 23px;
+            padding: 12px 23px;
             image {
                 margin: 20px 0;
             }

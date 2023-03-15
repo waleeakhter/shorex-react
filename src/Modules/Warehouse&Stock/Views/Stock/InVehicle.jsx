@@ -1,66 +1,67 @@
 import React from 'react'
 import RemoteTable from '@evenlogics/whf-remote-table'
 import moment from 'moment'
-const defaultSorted = [{ dataField: 'id', order: 'desc' }]
-const columns = [
-    {
-        dataField: 'id',
-        text: '#ID',
-        sort: true,
-    },
-    {
-        dataField: 'warehouse.manager',
-        text: 'Warehouse Manager',
-        sort: true,
-        formatter: (cell) => cell ?? <span className="text-red">Not Assigned</span>
-    },
-    {
-        dataField: 'title',
-        text: 'Product Name',
-        sort: true,
-        formatter: (cell, row) => "Aluminum Cans"
-    },
-    {
-        dataField: 'vehicle_stock',
-        text: 'Quantity',
-        sort: true,
-        formatter: (cell) => cell ?? 0
-    },
-    {
-        dataField: 'updated_at',
-        text: 'Delivery Time',
-        sort: true,
-        formatter: (cell) => {
-            const date = new Date(cell);
-            return `${moment(date).format('MMM DD, YYYY')} at ${moment(date).format('hh:ss a')}`
-        }
-    },
-    {
-        dataField: 'driver.vehicle.reg_no',
-        text: 'Vehicle Number',
-        sort: true,
-    },
-    {
-        dataField: 'driver.first_name',
-        text: 'Driver Name',
-        sort: true,
-        formatter: (cell ,row) => `${cell} ${row.driver.last_name}` ?? <span className="text-red">Not Assigned</span>
-    },
-    {
-        dataField: 'status',
-        text: 'Status',
-        sort: true,
-        formatter: (cell) => <span className="text-red">On the Way</span>
-    },
-]
+import {withTranslation} from 'react-i18next'
 
-
+const defaultSorted = [{ dataField: 'product.title', order: 'desc' }]
 
 const InVehicle = (props) => {
+    const columns = [
+        // {
+        //     dataField: 'id',
+        //     text: props.t('id'),
+        //     sort: true,
+        // },
+        {
+            dataField: 'warehouse.manager',
+            text: props.t('shorex:warehouse-manager'),
+            sort: true,
+            formatter: (cell) => cell ?? <span className="text-red">{props.t('shorex:not-assigned')}</span>
+        },
+        {
+            dataField: 'product.title',
+            text: props.t('shorex:product-name'),
+            sort: true,
+            //formatter: (cell, row) => {props.t('shorex:aluminum-cans')}
+        },
+        {
+            dataField: 'wtqt',
+            text: props.t('shorex:quantity'),
+            sort: true,
+            formatter: (cell) => cell ?? 0
+        },
+        {
+            dataField: 'updated_at',
+            text: props.t('shorex:delivery-time'),
+            sort: true,
+            formatter: (cell) => {
+                const date = new Date(cell);
+                return `${moment(date).format('MMM DD, YYYY')} at ${moment(date).format('hh:ss a')}`
+            }
+        },
+        {
+            dataField: 'vehicle_number',
+            text: props.t('shorex:vehicle-number'),
+            sort: true,
+        },
+        {
+            dataField: 'driver_name',
+            text: props.t('shorex:driver-name'),
+            sort: true,
+            
+        },
+        {
+            dataField: 'status',
+            text: props.t('status'),
+            sort: true,
+            formatter: (cell) => <span className="text-red">{props.t('shorex:on-the-way')}</span>
+        },
+    ]
+
     return (
         <RemoteTable
-            entity="products"
-            customEntity="products"
+            entity="stock"
+            customEntity="stock"
             columns={columns}
             sort={defaultSorted}
             hideEdit={true}
@@ -68,10 +69,10 @@ const InVehicle = (props) => {
             disableDelete={false}
             hideQuickSearch={true}
             hideActionCol={true}
-            query={{'stock_status' : 'Received'}}
+            query={{'status' : 'Received'}}
             
         />
     )
 }
 
-export default InVehicle
+export default withTranslation(['base', 'shorex'])(InVehicle)

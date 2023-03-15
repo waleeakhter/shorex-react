@@ -2,6 +2,7 @@ import React from 'react'
 import "./Header.scss"
 import Language from './Language'
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   CHeader,
   CHeaderBrand,
@@ -14,24 +15,19 @@ import {
 import { Logo } from "@evenlogics/whf-ra-components";
 import Notification from './Notification';
 import Profile from './Profile';
-
+import {withTranslation} from 'react-i18next'
 const Header = (props) => {
   let element_moon = document.querySelector('.fa-moon')
   let element_sun = document.querySelector('.fa-sun')
   const dispatch = useDispatch();
   /* eslint-enable */
   const sidebarShow = useSelector((state) => state.sidebarShow);
-
   if (element_moon && element_sun) {
     element_sun.style.display = "none";
     element_moon.style.display = "none";
   }
 
-
-
-  const toggleSidebarMobile = () => {
-    console.log("clicking 2")
-
+  const toggleSidebarMobile = (props) => {
     const val = [false, "responsive"].includes(sidebarShow)
       ? true
       : "responsive";
@@ -54,7 +50,7 @@ const Header = (props) => {
         <CHeaderNavItem className="px-3">
 
           <CHeaderNavLink to="/">
-            Shorex Dashboard
+              {props.t('shorex:shorex-dashboard')}
           </CHeaderNavLink>
 
         </CHeaderNavItem>
@@ -71,6 +67,5 @@ const Header = (props) => {
   )
 }
 
-export default Header
-
+export default withTranslation(['base', 'shorex'])(Header)
 

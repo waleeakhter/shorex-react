@@ -5,10 +5,25 @@ import { initialValues } from "./functions/IntialValues"
 import { validationSchema } from "./functions/validationSchema"
 import AdvanceSelect from "./../../../../Common/AdvanceSelect/AdvanceSelect"
 import { onSubmit, handleSelectChange, getData } from "./functions/generic"
+import {withTranslation} from 'react-i18next'
+import { useLocation } from "react-router-dom";
 
 const AddNotification = (props) => {
+    const search = useLocation().search;
+    const getInitialValues=()=>{
+        const userId=new URLSearchParams(search).get("user")
+        const nif=new URLSearchParams(search).get("nif")
+        let _initialValues={...initialValues}
+        if(userId && nif){
+            _initialValues.user_id=parseInt(userId)
+            _initialValues.type='single'
+            _initialValues.nif=nif
+        } 
+        return _initialValues
+    }
+
     const { id } = props.match.params
-    const [notifications, setNotifications] = React.useState(initialValues);
+    const [notifications, setNotifications] = React.useState(getInitialValues());
     const [spinner, setSpinner] = React.useState(true)
     const [image, setImage] = React.useState(null)
     React.useEffect(() => {
@@ -17,6 +32,25 @@ const AddNotification = (props) => {
             :
             setSpinner(false)
     }, [id])
+
+    const roles= [
+        {
+          "value": 3,
+          "label": props.t('shorex:driver'),
+         
+        },
+        {
+          "value": 4,
+          "label": props.t('shorex:warehouse-manager') 
+        //   "Warehouse Manager",
+         
+        },
+        {
+          "value": 5,
+          "label": props.t('shorex:business') 
+        //   "Business"
+        }
+      ]
 
     return (
         <Formik
@@ -30,15 +64,15 @@ const AddNotification = (props) => {
                     {!spinner ?
                         <Row className="gx-5 gy-3 align-items-center">
                             <Form.Group as={Col} xs="12" className="mb-4">
-                                <h4 className="heading">{id ? 'Edit' : 'Add'} Promotional Banners</h4>
+                                <h4 className="heading">{id ?  props.t('shorex:edit-notification') : props.t('shorex:add-notification')}</h4>
                             </Form.Group>
 
                             <Form.Group as={Col} md="6" xl="4" controlId="title_en" className="form-group"
                             >
-                                <Form.Label>Notification Title (English) *</Form.Label>
+                                <Form.Label>{props.t('shorex:notification-title-en')} *</Form.Label>
                                 <Field
                                     name="title_en" type="text" value={values.title_en ?? ""}
-                                    placeholder="Enter promotion title" className="form-control"
+                                    placeholder={props.t('shorex:enter-promotion-title-en')} className="form-control"
                                 />
                                 <div className="text-red mt-2">
                                     <ErrorMessage name="title_en" />
@@ -47,10 +81,10 @@ const AddNotification = (props) => {
 
                             <Form.Group as={Col} md="6" xl="4" controlId="title_fr" className="form-group"
                             >
-                                <Form.Label>Notification Title (French) *</Form.Label>
+                                <Form.Label>{props.t('shorex:notification-title-es')} *</Form.Label>
                                 <Field
                                     name="title_fr" type="text" value={values.title_fr ?? ""}
-                                    placeholder="Enter promotion title in french" className="form-control"
+                                    placeholder={props.t('shorex:enter-promotion-title-es')} className="form-control"
                                 />
                                 <div className="text-red mt-2">
                                     <ErrorMessage name="title_en" />
@@ -63,12 +97,12 @@ const AddNotification = (props) => {
                                 <div className="d-flex">
                                     <div className="form-check pl-0 flex-align">
                                         <Field type="radio" name="type" value="group" id="group" />
-                                        <Form.Label htmlFor="group">For Group</Form.Label>
+                                        <Form.Label htmlFor="group">{props.t('shorex:for-group')}</Form.Label>
 
                                     </div>
                                     <div className="form-check pl-0 flex-align">
                                         <Field type="radio" name="type" value="single" id="single" />
-                                        <Form.Label htmlFor="single" >For Single User</Form.Label >
+                                        <Form.Label htmlFor="single" >{props.t('shorex:for-single-user')}</Form.Label >
                                     </div>
                                 </div>
                                 <div className="text-red pl-3">
@@ -76,15 +110,17 @@ const AddNotification = (props) => {
                                 </div>
                             </Form.Group>
 
-
+                           
                             <Form.Group as={Col} md="6" xl="4" controlId="role_id"
                                 className={`form-group ${values.type === 'group' ? 'd-block' : 'd-none'}`} >
-                                <Form.Label>Select Group *</Form.Label>
-                                <AdvanceSelect target="roles" name="role_id"
+                                <Form.Label>{props.t('shorex:select-group')} *</Form.Label>
+                                <AdvanceSelect
+                                    options={roles}
+                                    name="role_id"
                                     setFieldValue={setFieldValue}
                                     callback={handleSelectChange}
                                     value={values.role_id}
-                                />
+                                /> 
                                 <div className="text-red mt-2">
                                     <ErrorMessage name="role_id" />
                                 </div>
@@ -93,8 +129,8 @@ const AddNotification = (props) => {
 
                             <Form.Group as={Col} md="6" xl="4" controlId="user_id"
                                 className={`form-group ${values.type === 'single' ? 'd-block' : 'd-none'}`} >
-                                <Form.Label>Name *</Form.Label>
-                                <AdvanceSelect target="users" name="user_id"
+                                <Form.Label>{props.t('name')} *</Form.Label>
+                                <AdvanceSelect target="users?limit=10000000" name="user_id"
                                     setFieldValue={setFieldValue}
                                     callback={handleSelectChange}
                                     lableValue={'first_name'}
@@ -110,10 +146,10 @@ const AddNotification = (props) => {
                             <Form.Group as={Col} md="6" xl="4" controlId="nif"
                                 className={`form-group ${values.type === 'single' ? 'd-block' : 'd-none'}`}
                             >
-                                <Form.Label>ID *</Form.Label>
+                                <Form.Label>{props.t('id')} *</Form.Label>
                                 <Field
                                     name="nif" type="text" value={values.nif ?? ""}
-                                    placeholder="Enter user ID" className="form-control"
+                                    placeholder={props.t('shorex:enter-user-id')} className="form-control"
                                     rows="5"
                                 />
                                 <div className="text-red mt-2">
@@ -124,10 +160,10 @@ const AddNotification = (props) => {
                             <div as={Col} xs="12">
                                 <Row>
                                     <Form.Group as={Col} xs="12" md="6" xl="4" controlId="text_en" className="form-group">
-                                        <Form.Label>Notes (English) *</Form.Label>
+                                        <Form.Label>{props.t('shorex:notes-en')} *</Form.Label>
                                         <Field
                                             name="text_en" as="textarea" value={values.text_en ?? ""}
-                                            placeholder="Enter some text english" className="form-control"
+                                            placeholder={props.t('shorex:enter-some-text-en')} className="form-control"
                                             rows="5"
                                         />
                                         <div className="text-red mt-2">
@@ -136,10 +172,10 @@ const AddNotification = (props) => {
                                     </Form.Group>
                                     <Form.Group as={Col} xs="12" md="6" xl="4" controlId="text_fr" className="form-group"
                                     >
-                                        <Form.Label>Notes (French) *</Form.Label>
+                                        <Form.Label>{props.t('shorex:notes-es')} *</Form.Label>
                                         <Field
                                             name="text_fr" as="textarea" value={values.text_fr ?? ""}
-                                            placeholder="Enter some text in french" className="form-control"
+                                            placeholder={props.t('shorex:enter-some-text-es')} className="form-control"
                                             rows="5"
                                         />
                                         <div className="text-red mt-2">
@@ -150,15 +186,15 @@ const AddNotification = (props) => {
                             </div>
 
                             <Form.Group as={Col} lg="12" className="mb-4">
-                                <h4 className="heading">Media</h4>
+                                <h4 className="heading">{props.t('shorex:media')}</h4>
                             </Form.Group>
 
                             <Form.Group as={Col} md="6" xl="4" controlId="notification_img" className="form-group"
                             >
-                                <Form.Label>Notification Image</Form.Label>
+                                <Form.Label>{props.t('shorex:notification-img')}</Form.Label>
                                 <input
                                     name="notification_img" type="file"
-                                    placeholder="Enter promotion title" className="form-control"
+                                    placeholder={props.t('shorex:enter-promotion-title')} className="form-control"
                                     rows="5"
                                     onChange={(e) => {
                                         setFieldValue("notification_img", e.target.files[0], setImage(e.target.files[0]));
@@ -170,7 +206,7 @@ const AddNotification = (props) => {
                             </Form.Group>}
 
                             <div className="from-group w-100  my-5">
-                                <Button type="submit" variant='success' style={{ width: 130, height: 36, fontSize: 15, lineHeight: "25px" }}> Send </Button>
+                                <Button type="submit" variant='success' style={{ width: 130, height: 36, fontSize: 15, lineHeight: "25px" }}> {props.t('shorex:send')} </Button>
                             </div>
 
                         </Row>
@@ -178,7 +214,7 @@ const AddNotification = (props) => {
                             <Spinner animation="border" />
                         </div>
                     }
-                    {/* {true && (
+                    {false && (
                         <div className={"row"}>
                             <div className={"col-12"}>
                                 <code>
@@ -192,7 +228,7 @@ const AddNotification = (props) => {
                                 <pre>Touched: {JSON.stringify(touched, null, 2)}</pre>
                             </div>
                         </div>
-                    )} */}
+                    )}
                 </form>
             )
             }
@@ -200,4 +236,4 @@ const AddNotification = (props) => {
     )
 }
 
-export default AddNotification
+export default withTranslation(['base', 'shorex'])(AddNotification)

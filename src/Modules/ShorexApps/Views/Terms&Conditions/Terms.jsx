@@ -1,9 +1,10 @@
 import React from 'react'
 import ListView from "./../../../../Common/TermsAndPolicey/ListView"
-const Terms = () => {
+import {withTranslation} from 'react-i18next'
+const Terms = (props) => {
     return (
-        <ListView heading={'Terms Conditions'} target="terms-and-conditions" edit="terms-conditions/edit?edit=true" add="terms-conditions/add" />
+        <ListView heading={props.t('shorex:terms-conditions')} target="terms-and-conditions" edit="terms-conditions/edit?edit=true" add="terms-conditions/add" />
     )
 }
 
-export default Terms
+export default withTranslation(['base', 'shorex'])(Terms)

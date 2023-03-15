@@ -11,12 +11,12 @@ export const validationSchema = (id) => {
         business_name: yup.string().required("Field is required!"),
         nif: yup.string().required("Field is required!"),
         address: yup.string().required("Field is required!"),
-        account_hldr_name: yup.string().required("Field is required!"),
-        bank_name: yup.string().required("Field is required!"),
-        incharge_staff: yup.string().required("Field is required!"),
-        notes: yup.string().required("Field is required!").nullable(),
-        iban: yup.string().required("Field is required!"),
-        category_id: yup.number().required("Field is required!").nullable(),
+        // account_hldr_name: yup.string().required("Field is required!"),
+        // bank_name: yup.string().required("Field is required!"),
+        // incharge_staff: yup.string().required("Field is required!"),
+        // notes: yup.string().required("Field is required!").nullable(),
+        // iban: yup.string().required("Field is required!"),
+        // category_id: yup.number().required("Field is required!").nullable(),
         license_img: !id && yup.string().required('A file is required').nullable(),
     });
 };

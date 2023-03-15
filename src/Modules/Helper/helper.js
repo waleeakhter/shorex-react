@@ -4,29 +4,33 @@ import Swal from 'sweetalert2'
 
 
 
-export const deleteItem = async (id, target) => {
-    console.log(id)
+export const deleteItem = async (id, target,t) => {
     return Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: t('base:general-delete-statement'),
+        text: t(`shorex:you-wont-be-able-to-revert-this`),
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#51ab1d',
         cancelButtonColor: '#ff6a6a',
-        confirmButtonText: 'Yes, delete it!'
+        cancelButtonText:t('base:general-cancel'),
+        confirmButtonText: `${t('shorex:yes')}, ${t('shorex:delete-it')}!`
     }).then((result) => {
         console.log(result)
         if (result.isConfirmed) {
             return Api.request("delete", `/${target}/${id}`)
                 .then(res => {
                     console.log(res);
-                    toast.success(res.message);
+                    toast.success(t(`shorex:${res.message}`));
                     return true;
                 })
                 .catch(err => {
                     console.log(err);
-                    toast.error("Something Went Wrong");
-                    return true;
+                    if(err?.response?.data?.message){
+                        toast.error(t('shorex:'+err.response.data.message))
+                    }else{
+                        toast.error("Something Went Wrong");
+                    }
+                    throw new Error(err)
                 })
 
         }  

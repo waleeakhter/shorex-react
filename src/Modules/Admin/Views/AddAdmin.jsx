@@ -1,15 +1,16 @@
 import React from 'react'
 import { FormGenerator } from '@evenlogics/whf-form-generator'
 import { useParams } from "react-router-dom";
+import {withTranslation} from 'react-i18next'
 const UpdateProfile = (props) => {
     const params = useParams();
-    const [maskedValue] = React.useState("+33-000-000-000")
+    const [maskedValue] = React.useState("+00-000-000-000")
 
 
     let fields = {
         first_name: {
             type: 'text',
-            label: 'First Name',
+            label: props.t('shorex:first-name'),
             required: true,
             name: 'first_name',
             col: 6,
@@ -19,7 +20,7 @@ const UpdateProfile = (props) => {
         },
         last_name: {
             type: 'text',
-            label: 'Last Name',
+            label: props.t('shorex:last-name'),
             required: true,
             name: 'last_name',
             col: 6,
@@ -29,7 +30,7 @@ const UpdateProfile = (props) => {
         },
         email: {
             type: 'email',
-            label: 'Email',
+            label: props.t('email'),
             required: true,
             name: 'email',
             col: 6,
@@ -39,7 +40,7 @@ const UpdateProfile = (props) => {
         },
         mobile: {
             type: 'masked',
-            label: 'Contact Number',
+            label: props.t('shorex:contact-number'),
             required: true,
             name: 'mobile',
             col: 6,
@@ -55,7 +56,7 @@ const UpdateProfile = (props) => {
         },
         address: {
             type: 'location',
-            label: 'Address',
+            label: props.t('address'),
             required: true,
             name: 'address',
             col: 6,
@@ -66,12 +67,12 @@ const UpdateProfile = (props) => {
 
         heading: {
             type: 'h4',
-            name: 'Change Password',
+            name: props.t('shorex:change-password'),
             className: 'form-control-lg',
         },
         password: {
             type: 'password',
-            label: `Password`,
+            label: props.t('user:password'),
             name: 'password',
             col: 6,
             placeholder: 'Enter password',
@@ -80,7 +81,7 @@ const UpdateProfile = (props) => {
         },
         password_confirmation: {
             type: 'password',
-            label: `Password Confirmation`,
+            label: props.t('user:password-confirmation'),
             name: 'password_confirmation',
             col: 6,
             placeholder: 'Enter password',
@@ -99,9 +100,9 @@ const UpdateProfile = (props) => {
             targetId={params?.id ?? props.id}
             name="products"
             debug={false}
-            redirect="admin-profile"
+            redirect="settings"
         />
     )
 }
 
-export default UpdateProfile
+export default withTranslation(['base', 'shorex','user']) (UpdateProfile)

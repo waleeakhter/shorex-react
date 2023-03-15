@@ -4,61 +4,62 @@ import { Row, Col } from 'react-bootstrap'
 import Api from '@evenlogics/whf-api'
 import { toast } from 'react-toastify'
 import UserProfile from './../../../../Common/UserProfile/UserProfile'
+import {withTranslation} from 'react-i18next'
+
 const defaultSorted = [{ dataField: 'id', order: 'desc' }]
-const columns = [
-    {
-        dataField: 'id',
-        text: '',
-        sort: true,
-        formatter: (cell) => " "
-    },
-    {
-        dataField: 'route_id',
-        text: 'Route',
-        sort: true,
-        formatter: (cell) =>
-            cell === 1 ? 'Route 1' : cell === 2 ? 'Route 2' : 'Route 3'
-    },
-    {
-        dataField: 'schedule_type',
-        text: 'Schedule Type',
-        sort: true,
-    },
-    {
-        dataField: 'schedule',
-        text: 'Schedule',
-        sort: true,
-        formatter: cell => {
-            const dates = JSON.parse(cell)
-            return Object.keys(dates).length > 0 ?
-                <ul className=" list-unstyled " style={{ whiteSpace: 'nowrap' }}>
-                    <li>Date: {dates.date}</li>
-                    {dates.morning_start_time &&
-                        <>
-                            <li><h6 className="mb-0">Morning Time</h6></li>
-                            <li><small>Start: {dates.morning_start_time}</small> <small>End: {dates.morning_end_time}</small></li>
-                        </>}
-                    {dates.evening_start_time &&
-                        <>
-                            <li><h6 className="mb-0">Evening Time</h6></li>
-                            <li><small>Start: {dates.evening_start_time}</small> <small>End: {dates.evening_end_time}</small></li>
-                        </>}
-                </ul>
-
-                : ""
-
-        }
-    },
-
-    {
-        dataField: 'status',
-        text: 'Status',
-        sort: true,
-    },
-]
-
 
 const Profile = (props) => {
+    const columns = [
+        {
+            dataField: 'id',
+            text: props.t('id'),
+            sort: true,
+            formatter: (cell) => " "
+        },
+        {
+            dataField: 'route_id',
+            text: props.t('shorex:route'),
+            sort: true,
+            formatter: (cell) =>
+                cell === 1 ? 'Route 1' : cell === 2 ? 'Route 2' : 'Route 3'
+        },
+        {
+            dataField: 'schedule_type',
+            text: props.t('shorex:schedule-type'),
+            sort: true,
+        },
+        {
+            dataField: 'schedule',
+            text: props.t('shorex:schedule'),
+            sort: true,
+            formatter: cell => {
+                const dates = JSON.parse(cell)
+                return Object.keys(dates).length > 0 ?
+                    <ul className=" list-unstyled " style={{ whiteSpace: 'nowrap' }}>
+                        <li>Date: {dates.date}</li>
+                        {dates.morning_start_time &&
+                            <>
+                                <li><h6 className="mb-0">{props.t('shorex:morning-time')}</h6></li>
+                                <li><small>{props.t('shorex:start')}: {dates.morning_start_time}</small> <small>{props.t('shorex:end')}: {dates.morning_end_time}</small></li>
+                            </>}
+                        {dates.evening_start_time &&
+                            <>
+                                <li><h6 className="mb-0">{props.t('shorex:evening-time')}</h6></li>
+                                <li><small>{props.t('shorex:start')}: {dates.evening_start_time}</small> <small>{props.t('shorex:end')}: {dates.evening_end_time}</small></li>
+                            </>}
+                    </ul>
+
+                    : ""
+
+            }
+        },
+
+        {
+            dataField: 'status',
+            text: props.t('status'),
+            sort: true,
+        },
+    ]
 
     const { id } = props.match.params
     const [driver, setDriver] = React.useState(null)
@@ -72,9 +73,9 @@ const Profile = (props) => {
                 })
                 .catch(err => {
                     console.error(err);
-                    toast.error(" Somthing Went Wrong ")
+                    toast.error(props.t('shorex:something-went-wrong'))
                 })
-    }, [id])
+    }, [id, props])
     return (
         <div className="DriverProfile">
             <Row>
@@ -102,4 +103,4 @@ const Profile = (props) => {
     )
 }
 
-export default Profile
+export default withTranslation(['base', 'shorex'])(Profile)

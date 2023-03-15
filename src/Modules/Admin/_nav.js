@@ -6,6 +6,6 @@ export default {
   //   to: '/profile',
   //   order: 2,
   //   icon: 'fa-regular fa-user',
-  //   roles: ['Admin'],
+  //  roles: ['Admin','Sub Admin'],
   // },
 }

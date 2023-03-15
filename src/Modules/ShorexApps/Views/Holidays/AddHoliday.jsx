@@ -1,6 +1,8 @@
 import React from 'react'
 import { FormGenerator } from '@evenlogics/whf-form-generator'
 import { Row, Col } from 'react-bootstrap'
+import {withTranslation} from 'react-i18next'
+
 const AddCategory = (props) => {
   const { id } = props.match.params
   const date = new Date()
@@ -9,21 +11,21 @@ const AddCategory = (props) => {
   let fields = {
     title: {
       type: 'text',
-      label: 'Holiday Title',
+      label: props.t('shorex:holiday-title'),
       required: true,
       name: 'title',
       col: ' col-sm-6 col-xl-4',
-      placeholder: 'Enter holiday title',
+      placeholder: '',
       className: 'form-control-lg',
       autoComplete: 'off',
     },
     date: {
       type: 'date',
-      label: 'Select Date',
+      label: props.t('shorex:select-date'),
       required: true,
       name: 'date',
       col: ' col-sm-6 col-xl-4',
-      placeholderText: 'Select Date',
+      placeholderText: '',
       className: 'form-control-lg',
       autoComplete: 'off',
       dateFormat:"dd/MM/yyyy",
@@ -31,11 +33,10 @@ const AddCategory = (props) => {
     },
     notes: {
       type: 'textarea',
-      label: 'Aditional Notes',
-      required: true,
+      label: props.t('shorex:additional-notes'),
       name: 'notes',
       col: ' col-12',
-      placeholderText: 'Select Date',
+      placeholderText: '',
       className: 'form-control-lg',
       autoComplete: 'off',
       rows:5
@@ -44,7 +45,7 @@ const AddCategory = (props) => {
 
   return (
     <div>
-      <h4 className="heading mb-4">{id ? 'Edit' : "Add"} Business Category</h4>
+      <h4 className="heading mb-4">{id ? props.t('shorex:edit-holiday') : props.t('shorex:add-holiday')}</h4>
       <Row>
         <Col xxl="10">
           <FormGenerator
@@ -61,4 +62,4 @@ const AddCategory = (props) => {
   )
 }
 
-export default AddCategory
+export default withTranslation(['base', 'shorex'])(AddCategory)

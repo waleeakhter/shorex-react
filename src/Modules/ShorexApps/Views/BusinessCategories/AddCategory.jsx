@@ -1,6 +1,8 @@
 import React from 'react'
 import { FormGenerator } from '@evenlogics/whf-form-generator'
 import { Row, Col } from 'react-bootstrap'
+import {withTranslation} from 'react-i18next'
+
 const AddCategory = (props) => {
   const { id } = props.match.params
 
@@ -9,11 +11,11 @@ const AddCategory = (props) => {
   let fields = {
     title: {
       type: 'text',
-      label: 'Category Name',
+      label: props.t('shorex:category-name'),
       required: true,
       name: 'title',
       col: ' col-sm-6 col-xl-4',
-      placeholder: 'Enter category name',
+      placeholder: props.t('shorex:enter-category-name'),
       className: 'form-control-lg',
       autoComplete: 'off',
     },
@@ -21,7 +23,7 @@ const AddCategory = (props) => {
 
   return (
     <div>
-      <h4 className="heading mb-4">{id ? 'Edit' : "Add"} Business Category</h4>
+      <h4 className="heading mb-4">{id ? props.t('shorex:edit-business-categories') : props.t('shorex:add-business-categories')}</h4>
       <Row>
         <Col xxl="10">
           <FormGenerator
@@ -38,4 +40,4 @@ const AddCategory = (props) => {
   )
 }
 
-export default AddCategory
+export default withTranslation(['base', 'shorex'])(AddCategory)

@@ -2,10 +2,10 @@ export default {
   Reports: {
     _tag: 'CSidebarNavItem',
     name: 'Reports',
-    phrase: 'Reports',
+    phrase: 'nav-reports',
     to: '/reports',
     order: 5,
     icon: 'fa-regular fa-file-lines',
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 }

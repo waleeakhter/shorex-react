@@ -1,7 +1,10 @@
 import React from 'react'
 import { Row, Col, Button, Form } from 'react-bootstrap'
 import AdvanceSelect from "./../../../Common/AdvanceSelect/AdvanceSelect"
-const Filters = ({ setFilterQuery }) => {
+import {withTranslation} from 'react-i18next'
+
+const Filters = (props) => {
+    const { setFilterQuery } = props;
     const [search, setSearch] = React.useState({})
 
     const handleSelectChange = (value) => {
@@ -17,8 +20,8 @@ const Filters = ({ setFilterQuery }) => {
         <>
             <Row className="animated fadeIn mt-4 gy-3">
                 <Form.Group as={Col} sm="6" xl="4" controlId="first_name" >
-                    <Form.Label>Postal Code </Form.Label>
-                    <Form.Control type="text" placeholder="Enter Postal Code"
+                    <Form.Label>{props.t('shorex:postal-code')} </Form.Label>
+                    <Form.Control type="text" placeholder={props.t('shorex:enter-postal-code')}
                         name="fields_post_code" autoComplete='off'
                         onChange={(e) => {
                             setSearch({ ...search, fields_post_code: e.target.value })
@@ -35,17 +38,17 @@ const Filters = ({ setFilterQuery }) => {
         </Form.Group> */}
 
                 <Form.Group as={Col} sm="6" xl="4" controlId="category_id" >
-                    <Form.Label>Nature Of Business</Form.Label>
+                    <Form.Label>{props.t('shorex:nature-of-business')}</Form.Label>
                     <AdvanceSelect target="categories?limit=9999" name="fields_category_id" lableValue="title"
                         callback={handleSelectChange}
                     />
                 </Form.Group>
                 <Form.Group as={Col} xs="12" controlId="category_id" >
-                    <Button variant="success" className="btn btn-search" onClick={filterFunction}>Search</Button>
+                    <Button variant="success" className="btn btn-search" onClick={filterFunction}>{props.t('base:general-search')}</Button>
                 </Form.Group>
             </Row>
         </>
     )
 }
 
-export default Filters
+export default withTranslation(['base', 'shorex'])(Filters)

@@ -4,8 +4,30 @@ import { Row, Col } from 'react-bootstrap'
 import Api from '@evenlogics/whf-api'
 import { toast } from 'react-toastify'
 import UserProfile from './../../../Common/UserProfile/UserProfile'
-const defaultSorted = [{ dataField: 'id', order: 'desc' }]
-const columns = [
+import {withTranslation} from 'react-i18next'
+
+
+
+const CustomerProfile = (props) => {
+
+    const { id } = props.match.params
+    const [driver, setDriver] = React.useState(null)
+
+    React.useEffect(() => {
+        id &&
+            Api.request('get', `/customers/${id}`)
+                .then(res => {
+                    console.log(res?.data)
+                    setDriver(res?.data)
+                })
+                .catch(err => {
+                    console.error(err);
+                    toast.error(" Somthing Went Wrong ")
+                })
+    }, [id])
+
+   const defaultSorted = [{ dataField: 'id', order: 'desc' }]
+   const columns = [
     {
         dataField: 'id',
         text: '',
@@ -14,21 +36,21 @@ const columns = [
     },
     {
         dataField: 'business_name',
-        text: 'Business Name',
+        text: props?.t('shorex:business-name'),
         sort: true,
     },
     {
         dataField: 'quantity',
-        text: 'Quantity',
+        text: props?.t('shorex:quantity'),
         sort: true,
     },
     {
         dataField: 'recycle_requests',
-        text: 'Time & Date',
+        text: props?.t('shorex:date-time'),
         sort: true,
         formatter: cell => {
             return <div className="scrollbar" style={{ maxHeight: 115, overflowY: 'auto' }}>
-                {cell.map((item, i) => {
+                {cell?.map((item, i) => {
                     const dates = JSON.parse(item?.schedule)
                     return Object.keys(dates).length > 0 ?
                         <>
@@ -50,35 +72,19 @@ const columns = [
 
     }, {
         dataField: 'status',
-        text: 'Status',
+        text: props.t('base:status'),
         sort: true,
     },
     {
         dataField: 'notes',
-        text: 'Reason',
+        text:  props.t('shorex:reason'),
         sort: true,
         formatter: (cell) => <span className="text-red">{cell}</span>
     },
 ]
 
 
-const CustomerProfile = (props) => {
 
-    const { id } = props.match.params
-    const [driver, setDriver] = React.useState(null)
-
-    React.useEffect(() => {
-        id &&
-            Api.request('get', `/customers/${id}`)
-                .then(res => {
-                    console.log(res?.data)
-                    setDriver(res?.data)
-                })
-                .catch(err => {
-                    console.error(err);
-                    toast.error(" Somthing Went Wrong ")
-                })
-    }, [id])
     return (
         <div className="DriverProfile">
             <Row>
@@ -98,6 +104,9 @@ const CustomerProfile = (props) => {
                     //   Query={query}
                     //   query={queryParams}
                     />
+                    {
+                        driver?.license_img_url && <img src={driver?.license_img_url} alt='driver license' className='img-thumbnail w-50' />
+                    }
                 </Col>
                 <Col lg="4">
                     <UserProfile profile={driver} msgBtn={true} />
@@ -107,4 +116,4 @@ const CustomerProfile = (props) => {
     )
 }
 
-export default CustomerProfile
+export default withTranslation(['base', 'shorex'])(CustomerProfile)

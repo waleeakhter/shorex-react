@@ -6,8 +6,10 @@ import { deleteItem } from "./../../Modules/Helper/helper"
 import { Paginator } from 'primereact/paginator';
 import "./pagination.scss"
 import { Dropdown } from 'primereact/dropdown';
-const ListView = ({ view, target, hide, edit, redirect, Filters, filterShow }) => {
+import {withTranslation} from 'react-i18next'
 
+const ListView = (props) => {
+  const { view, target, hide, edit, redirect, Filters, filterShow,deleteTarget }=props
   const [items, setitems] = React.useState([])
   const [spinner, setSpinner] = React.useState(true)
   const [filterQuery, setFilterQuery] = React.useState({})
@@ -21,10 +23,10 @@ const ListView = ({ view, target, hide, edit, redirect, Filters, filterShow }) =
         params = params + `${i !== 0 ? '&' : ""}${key}=${filterQuery[key]}`;
       })
     }
-
+    console.log(filterQuery);
 
     Api.request('get', `/${target}?${params ?? ""}&page=${pagination.page + 1}&limit=${pagination.limit}`).then((res) => {
-      console.log(res)
+      // console.log(res)
       setitems(res)
       setSpinner(false)
 
@@ -35,9 +37,16 @@ const ListView = ({ view, target, hide, edit, redirect, Filters, filterShow }) =
 
   const callBack = (id) => {
     console.log(id)
-    deleteItem(id, target).then((res) => {
-      console.log(res)
-      res && setitems(items.filter(item => item.id !== id))
+    let _target=target
+    if(deleteTarget){
+      _target=deleteTarget
+    }
+    deleteItem(id, _target,props.t).then((res) => {
+      // console.log(res)
+      res && setitems((items)=>{
+        items.data=items.data.filter(item => item.id !== id)
+        return {...items}
+      })
     }).catch((err) => {
       console.log(err)
     })
@@ -72,7 +81,7 @@ const ListView = ({ view, target, hide, edit, redirect, Filters, filterShow }) =
                   redirect={redirect?.replace(":id", `${item.id}`)}
                   view={view}
                   key={item?.id}
-                  avatar={item?.avatar}
+                  avatar={item?.avatar_url}
                   edit={`${edit}/${item.id}/edit`}
                   delete={(e) => { callBack(item.id) }}
                   hide={hide}
@@ -96,4 +105,4 @@ const ListView = ({ view, target, hide, edit, redirect, Filters, filterShow }) =
   )
 }
 
-export default ListView
+export default withTranslation(['base', 'shorex',]) (ListView)

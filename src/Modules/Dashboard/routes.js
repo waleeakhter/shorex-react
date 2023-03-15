@@ -6,7 +6,7 @@ const routes = {
     path: "/dashboard",
     exact: true,
     component: Dashboard,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
     isPublic : false,
   },
 };

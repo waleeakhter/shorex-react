@@ -3,10 +3,10 @@ export default {
   customers: {
     _tag: 'CSidebarNavItem',
     name: 'customers',
-    phrase: 'Customers',
+    phrase: 'nav-customers',
     to: '/customers',
     icon: 'fa-regular fa-user',
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
     order:7,
   },
 }

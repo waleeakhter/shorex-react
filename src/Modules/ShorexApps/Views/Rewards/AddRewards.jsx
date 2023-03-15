@@ -1,29 +1,29 @@
 import React from 'react'
 import { FormGenerator } from '@evenlogics/whf-form-generator'
 import { Row, Col } from 'react-bootstrap'
+import {withTranslation} from 'react-i18next'
+
 const AddRewards = (props) => {
   const { id } = props.match.params
-
-
 
   let fields = {
     points: {
       type: 'number',
-      label: 'Points',
+      label: props.t('shorex:points'),
       required: true,
       name: 'points',
       col: ' col-sm-6 col-xl-4',
-      placeholder: 'Enter points',
+      placeholder: props.t('shorex:enter-points'),
       className: 'form-control-lg',
       autoComplete: 'off',
     },
     rewards: {
       type: 'number',
-      label: 'In Euro',
+      label: props.t('shorex:in-euros'),
       required: true,
       name: 'reward',
       col: ' col-sm-6 col-xl-4',
-      placeholder: 'Enter reward amount',
+      placeholder: props.t('shorex:enter-reward-amount'),
       className: 'form-control-lg',
       autoComplete: 'off',
     },
@@ -31,7 +31,7 @@ const AddRewards = (props) => {
 
   return (
     <div>
-      <h4 className="heading mb-4">{id ? 'Edit' : "Add"} Business Category</h4>
+      <h4 className="heading mb-4">{id ? props.t('shorex:edit-rewards') : props.t('shorex:add-rewards')}</h4>
       <Row>
         <Col xxl="10">
           <FormGenerator
@@ -48,4 +48,4 @@ const AddRewards = (props) => {
   )
 }
 
-export default AddRewards
+export default withTranslation(['base', 'shorex'])(AddRewards)

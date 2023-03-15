@@ -1,58 +1,69 @@
 import React from 'react'
 import RemoteTable from '@evenlogics/whf-remote-table'
 import { Col, Row, } from "react-bootstrap";
+import {withTranslation} from 'react-i18next'
+
 const defaultSorted = [{ dataField: 'customer.first_name', order: 'desc' }]
 
-const columns = [
-
-  {
-    dataField: 'customer.first_name',
-    text: 'Customer Name',
-    sort: true,
-    formatter: (cell, row) => cell + ' ' + row?.customer?.last_name
-  },
-  {
-    dataField: 'customer.business_name',
-    text: 'Business Name',
-    sort: true,
-  },
-  {
-    dataField: 'products',
-    text: 'Quantity',
-    sort: true,
-    formatter: (cell) => {
-      let count = 0;
-      cell.map(pro => count += Number(pro.wtqt));
-      return count
-    }
-  },
-  {
-    dataField: 'driver_comments',
-    text: ' Reason To Unsuccessfull ',
-    sort: true,
-  },
-  {
-    dataField: 'schedule',
-    text: 'Pickup Time & Date',
-    sort: true,
-    formatter: (cell) => {
-      const dates = JSON.parse(cell);
-
-      return Object.keys(dates).length > 0 &&
-        <ul className=" list-unstyled " style={{ whiteSpace: 'nowrap' }}>
-          <li>Date: {dates.date}</li>
-          {dates.morning_start_time && <> <li><h6 className="mb-0">Morning Time</h6></li>
-            <li><small>Start: {dates.morning_start_time}</small> <small>End: {dates.morning_end_time}</small></li></>}
-          {dates.evening_start_time && <><li><h6 className="mb-0">Evening Time</h6></li>
-            <li><small>Start: {dates.evening_start_time}</small> <small>End: {dates.evening_end_time}</small></li></>}
-        </ul>
-    }
-  },
-]
-
-
-
 const UnsuccessfullRequest = (props) => {
+
+  const currentUser=JSON.parse(localStorage.getItem('currentUser'))
+  const disableDelete=!currentUser.roles.includes('Admin')
+  const columns = [
+
+    {
+      dataField: 'customer.first_name',
+      text: props.t('shorex:customer-name'),
+      sort: true,
+      formatter: (cell, row) => cell + ' ' + row?.customer?.last_name
+    },
+    {
+      dataField: 'customer.business_name',
+      text: props.t('shorex:business-name'),
+      sort: true,
+    },
+    {
+      dataField: 'products',
+      text: props.t('shorex:shorex-products'),
+      sort: true,
+      formatter: (cell) => {
+        let count = 0;
+        cell.map(pro => count += Number(pro.wtqt));
+        return count
+      }
+    },
+    {
+      dataField: 'products',
+      text: props.t('shorex:driver'),
+      sort: true,
+      formatter: (cell) => {
+        return cell.length>=1?cell[0].driver_pivot.first_name+' '+cell[0].driver_pivot.last_name:''
+      }
+    },
+    {
+      dataField: 'driver_comments',
+      text: props.t('shorex:reasons-to-unsuccessful'),
+      sort: true,
+    },
+    {
+      dataField: 'schedule',
+      text: props.t('shorex:pickup-time'),
+      sort: true,
+      formatter: (cell) => {
+        const dates = JSON.parse(cell);
+
+        return Object.keys(dates).length > 0 &&
+            <ul className=" list-unstyled " style={{ whiteSpace: 'nowrap' }}>
+              <li>{props.t('shorex:date')}: {dates.date}</li>
+              {dates.morning_start_time && <> <li><h6 className="mb-0">{props.t('morning-time')}:</h6></li>
+                <li><small>{props.t('shorex:start')}: {dates.morning_start_time}</small> <small>{props.t('shorex:end')}: {dates.morning_end_time}</small></li></>}
+              {dates.evening_start_time && <><li><h6 className="mb-0">{props.t('shorex:evening-time')}</h6></li>
+                <li><small>{props.t('shorex:start')}: {dates.evening_start_time}</small> <small>{props.t('shorex:end')}: {dates.evening_end_time}</small></li></>}
+            </ul>
+      }
+    },
+  ]
+
   const customerDetail = (row) => {
     console.log(row)
     props.history.push({
@@ -65,7 +76,7 @@ const UnsuccessfullRequest = (props) => {
     <div className="UnsuccessfullRequest">
       <Row className="align-items-center ">
         <Col sm="6" className="text-start">
-          <h4 className="heading">Customers Requests</h4>
+          <h4 className="heading">{props.t('shorex:unsuccessful-requests')}</h4>
         </Col>
       </Row>
       <RemoteTable
@@ -75,11 +86,11 @@ const UnsuccessfullRequest = (props) => {
         sort={defaultSorted}
         hideEdit={true}
         hideDetail={true}
-        disableDelete={false}
+        disableDelete={disableDelete}
         hideQuickSearch={true}
         query={{ status: 'false' }}
         customButton={{
-          name: "Detail",
+          name: props.t('shorex:detail'),
           color: "success",
           callback: customerDetail,
         }}
@@ -89,4 +100,4 @@ const UnsuccessfullRequest = (props) => {
   )
 }
 
-export default UnsuccessfullRequest
+export default withTranslation(['base', 'shorex'])(UnsuccessfullRequest)

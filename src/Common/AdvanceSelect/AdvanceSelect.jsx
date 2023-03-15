@@ -6,6 +6,10 @@ const AdvanceSelect = ({ target, callback, setFieldValue, name, value, options, 
 
     const [values, setValue] = useState(options ?? [])
 
+
+    useEffect(() => {
+        setValue(options)
+    }, [options])
     useEffect(() => {
         let isApiSubscribed = true;
         target && Api.request('get', `/${target}`).then((response) => {

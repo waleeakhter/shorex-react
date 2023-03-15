@@ -1,45 +1,45 @@
 import React from 'react'
 import { FormGenerator } from '@evenlogics/whf-form-generator'
+import {withTranslation} from 'react-i18next'
+
 const AddStorekeeper = (props) => {
     const { id } = props.match.params
-    const [maskedValue] = React.useState("+33-000-000-000")
-
-
+    const [maskedValue] = React.useState("+34-000-000-000")
 
     let fields = {
         first_name: {
             type: 'text',
-            label: 'First Name',
+            label: props.t('shorex:first-name'),
             required: true,
             name: 'first_name',
             col: ' col-sm-6 col-xl-4',
-            placeholder: 'Enter first name',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'off',
         },
         last_name: {
             type: 'text',
-            label: 'Last Name',
+            label: props.t('shorex:last-name'),
             required: true,
             name: 'last_name',
             col: ' col-sm-6 col-xl-4',
-            placeholder: 'Enter last name',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'off',
         },
         email: {
             type: 'email',
-            label: 'Email',
+            label: props.t('email'),
             required: true,
             name: 'email',
             col: ' col-sm-6 col-xl-4',
-            placeholder: 'Enter email',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'off',
         },
         phone: {
             type: 'masked',
-            label: 'Phone',
+            label: props.t('shorex:landline-number'),
             required: true,
             name: 'phone',
             col: ' col-sm-6 col-xl-4',
@@ -55,7 +55,7 @@ const AddStorekeeper = (props) => {
         },
         mobile: {
             type: 'masked',
-            label: `Mobile Number`,
+            label: props.t('shorex:mobile-number'),
             required: true,
             name: 'mobile',
             col: ' col-sm-6 col-xl-4',
@@ -71,41 +71,41 @@ const AddStorekeeper = (props) => {
         },
         manager_id: {
             type: 'text',
-            label: `Warehouse Manager ID`,
+            label: props.t('shorex:warehouse-manager-id'),
             required:true,
             name: 'manager_id',
             col: ' col-sm-6 col-xl-4',
-            placeholder: 'Enter warehouse manager ID',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'off',
         },
         password: {
             type: 'password',
-            label: `Password`,
+            label: props.t('password'),
             required: id ? false : true,
             name: 'password',
             col: ' col-sm-6 col-xl-4',
-            placeholder: 'Enter password',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'new-password',
         },
         warehouse_id: {
             type: 'advanceSelect',
             target:"warehouses?limit=9999",
-            optionLabel: "item_type",
+            optionLabel: "title",
             optionValue: "id",
-            label: `Warehouse`,
+            label: props.t('shorex:warehouse'),
             required: true,
             name: 'warehouse_id',
             col: ' col-sm-6 col-xl-4',
             placeholder: 'Select warehouse',
             className: 'form-control-lg',
             autoComplete: 'off',
-            multi:true
+            // multi:true
         },
         iban: {
             type: 'text',
-            label: `IBAN`,
+            label: props.t('shorex:iban'),
             required: true,
             name: 'iban',
             col: ' col-sm-6 col-xl-4',
@@ -116,34 +116,34 @@ const AddStorekeeper = (props) => {
        
         joining_date: {
             type: 'date',
-            label: `Joining Date`,
+            label: props.t('shorex:joining-date'),
             required: true,
             name: 'joining_date',
             col: ' col-sm-6 col-xl-4',
-            placeholderText: 'Select Joining Date',
+            placeholderText: '',
             className: 'form-control-lg',
             autoComplete: 'off',
             dateFormat:"dd/MM/yyyy",
         },
         bank_name: {
             type: 'text',
-            label: `Bank Name`,
+            label: props.t('shorex:bank-name'),
             required: true,
             name: 'bank_name',
             col: ' col-sm-6 col-xl-4',
-            placeholder: 'Enter bank name',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'off',
         },
  
         notes: {
             type: 'textarea',
-            label: `Notes`,
-            required: true,
+            label: props.t('shorex:notes'),
+            required: false,
             name: 'notes',
             rows:5,
             col:12,
-            placeholder: 'Enter Some Notes',
+            placeholder: '',
             className: 'form-control-lg',
             autoComplete: 'off',
         },
@@ -167,7 +167,7 @@ const AddStorekeeper = (props) => {
 
     return (
         <div>
-            <h4 className="heading mb-4">{id ? 'Edit' : "Add"} Storekeeper</h4>
+            <h4 className="heading mb-4">{id ? props.t('shorex:edit-storekeeper') : props.t('shorex:add-storekeeper')}</h4>
             <FormGenerator
                 targetEntity="managers"
                 fields={fields}
@@ -183,4 +183,4 @@ const AddStorekeeper = (props) => {
     )
 }
 
-export default AddStorekeeper
+export default withTranslation(['base', 'shorex'])(AddStorekeeper)

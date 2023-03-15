@@ -1,8 +1,10 @@
 import React from 'react'
 import { Modal, Button, Spinner } from 'react-bootstrap'
 import Wrapper from '../../../Helper/Wrapper';
-const DocsModal = ({ docs }) => {
+import {withTranslation} from 'react-i18next'
 
+const DocsModal = (props) => {
+    const { docs } = props;
     const [show, setShow] = React.useState(false);
     const [docsList, setDocs] = React.useState([])
     const handleClose = () => setShow(false);
@@ -15,12 +17,12 @@ const DocsModal = ({ docs }) => {
     return (
         <Wrapper>
             <Button variant="" className="shadow-none" style={{ color: "var(--blueCard)", fontSize: 14, fontWeight: "500" }} onClick={handleShow}>
-                View Documents
+                {props.t('shorex:view-documents')}
             </Button>
 
             <Modal centered scrollable={true} show={show} size="xl" fullscreen={'lg-down'} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title className="mb-0"> Registration Documents</Modal.Title>
+                    <Modal.Title className="mb-0"> {props.t('shorex:registeration-documents')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="flex-wrap d-flex" style={{ gap: '30px' }}>
                     {docsList.length > 0 ?
@@ -47,4 +49,4 @@ const DocsModal = ({ docs }) => {
     );
 }
 
-export default DocsModal
+export default withTranslation(['base', 'shorex'])(DocsModal)

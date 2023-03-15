@@ -60,7 +60,7 @@ export const onSubmit = (values, id, setSubmitting, props, setError) => {
                 console.log("res", response);
                 if (response?.message) {
                     setSubmitting(false);
-                    toast.success(response.message);
+                    toast.success(props.t('shorex:'+response.message));
                     props.history.push("/customers");
                 }
             })

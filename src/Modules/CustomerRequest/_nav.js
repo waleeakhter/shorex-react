@@ -2,10 +2,10 @@ export default {
   customerRequest: {
     _tag: 'CSidebarNavItem',
     name: 'notifications',
-    phrase: 'Customer Request',
+    phrase: 'customer-request',
     to: '/customer-request',
     order: 2,
     icon: 'fa-regular fa-user',
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 }

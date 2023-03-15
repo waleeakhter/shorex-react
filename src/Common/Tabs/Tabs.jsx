@@ -15,12 +15,9 @@ const Tabs = (props) => {
                         setKey(tab.name);
                         props.callback && props.callback(tab.name)
                     }}>
-
                     {tab.name}
-
                 </span>
             )}
-
         </div>
     )
 }

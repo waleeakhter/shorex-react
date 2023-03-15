@@ -2,10 +2,10 @@ export default {
   Rewards: {
     _tag: 'CSidebarNavItem',
     name: 'Rewards',
-    phrase: 'Rewards',
+    phrase: 'nav-rewards',
     to: '/rewards',
     order: 3,
     icon: 'fa-regular fa-award',
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 }

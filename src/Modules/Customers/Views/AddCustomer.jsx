@@ -7,8 +7,7 @@ import AdvanceSelect from "./../../../Common/AdvanceSelect/AdvanceSelect"
 import Geosuggest from "react-geosuggest";
 import InputMask from 'react-input-mask';
 import { onSubmit, handleInputChange, handleSelectChange, onSuggestSelect, getCustomer } from "./JS/generic"
-
-
+import {withTranslation} from 'react-i18next'
 
 const AddCustomer = (props) => {
 
@@ -64,36 +63,36 @@ const AddCustomer = (props) => {
                                 <Row className="mb-3" style={{ gap: '20px 0px', girdGap: '20px 0px' }}  >
 
                                     <Form.Group as={Col} xs="12">
-                                        <h4 className="heading mb-4">Add Customers</h4>
+                                        <h4 className="heading mb-4">{id?props.t('shorex:edit-customer'):props.t('shorex:add-customer')}</h4>
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="first_name" >
-                                        <Form.Label>First Name <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:first-name')} <span className="text-red">*</span></Form.Label>
                                         <Field name="first_name" type="text" value={values.first_name ?? ""}
-                                            placeholder="Enter first name" className="form-control" autoComplete='off'
+                                            placeholder={props.t('shorex:enter-first-name')} className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="first_name" /></span>
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="last_name" >
-                                        <Form.Label>Last Name <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:last-name')} <span className="text-red">*</span></Form.Label>
                                         <Field name="last_name" type="text" value={values.last_name ?? ""}
-                                            placeholder="Enter last name" className="form-control" autoComplete='off'
+                                            placeholder={props.t('shorex:enter-last-name')} className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="last_name" /></span>
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="email" >
-                                        <Form.Label>Email <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('email')} <span className="text-red">*</span></Form.Label>
                                         <Field name="email" type="email" value={values.email ?? ""}
-                                            placeholder="Enter email" className="form-control" autoComplete='off'
+                                            placeholder="your@email.com" className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="email" /></span>
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="phone" >
-                                        <Form.Label>Phone <span className="text-red">*</span></Form.Label>
-                                        <InputMask mask="+33-000-000-000" maskChar=" " placeholder="+33-000-000-000"
+                                        <Form.Label>{props.t('shorex:landline-number')} <span className="text-red">*</span></Form.Label>
+                                        <InputMask mask="+34-000-000-000" maskChar=" " placeholder="+34-000-000-000"
                                             name="phone" value={values.phone ?? ""} autoComplete='off'
                                             formatChars={
                                                 {
@@ -109,8 +108,8 @@ const AddCustomer = (props) => {
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="mobile" >
-                                        <Form.Label>Mobile Number <span className="text-red">*</span></Form.Label>
-                                        <InputMask mask="+33-000-000-000" maskChar=" " placeholder="+33-000-000-000"
+                                        <Form.Label>{props.t('shorex:mobile-number')} <span className="text-red">*</span></Form.Label>
+                                        <InputMask mask="+34-000-000-000" maskChar=" " placeholder="+34-000-000-000"
                                             name="mobile" value={values.mobile ?? ""} autoComplete='off'
                                             formatChars={
                                                 {
@@ -126,34 +125,34 @@ const AddCustomer = (props) => {
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="post_code" >
-                                        <Form.Label>Post Office Code <span className="text-red">*</span></Form.Label>
-                                        <Field name="post_code" type="text" value={values.post_code ?? ""}
-                                            placeholder="Enter post code" className="form-control" autoComplete='off'
+                                        <Form.Label>{props.t('shorex:postal-code')} <span className="text-red">*</span></Form.Label>
+                                        <Field name="post_code" type="text" maxlength="5" value={values.post_code ?? ""}
+                                            placeholder="" className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="post_code" /></span>
                                     </Form.Group>
 
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="business_name" >
-                                        <Form.Label>Business Name <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:business-name')} <span className="text-red">*</span></Form.Label>
                                         <Field name="business_name" type="text" value={values.business_name ?? ""}
-                                            placeholder="Enter business name" className="form-control" autoComplete='off'
+                                            placeholder="" className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="business_name" /></span>
                                     </Form.Group>
 
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="nif" >
-                                        <Form.Label>License Code (CIF, DNI, NIF) <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:license-no')}<span className="text-red">*</span></Form.Label>
                                         <Field name="nif" type="text" value={values.nif ?? ""}
-                                            placeholder="Enter license code" className="form-control" autoComplete='off'
+                                            placeholder={props.t('shorex:enter-postal-code')} className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="nif" /></span>
                                     </Form.Group>
 
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="address" >
-                                        <Form.Label>Address & Map Location <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:address-map-location')} <span className="text-red">*</span></Form.Label>
                                         <Geosuggest
                                             ref={geosuggestEl} initialValue={values.address} placeholder="Start typing!"
                                             onSuggestSelect={(suggest) =>
@@ -165,7 +164,7 @@ const AddCustomer = (props) => {
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="category_id" >
-                                        <Form.Label>Business Categories <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('base:business-category')} <span className="text-red"></span></Form.Label>
                                         <AdvanceSelect target="categories" name="category_id" value={values.category_id}
                                             callback={handleSelectChange} setFieldValue={setFieldValue} lableValue="title" />
                                         <span className="text-red" ><ErrorMessage name="category_id" /></span>
@@ -173,16 +172,16 @@ const AddCustomer = (props) => {
 
 
                                     <Form.Group as={Col} sm="6" xl="4" controlId="incharge_staff" >
-                                        <Form.Label>Other Staff in Charge <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:other-staff-incharge')} </Form.Label>
                                         <Field name="incharge_staff" type="text" value={values.incharge_staff ?? ""}
-                                            placeholder="Enter incharge staff" className="form-control" autoComplete='off'
+                                            placeholder={props.t('shorex:enter-incharge-staff-name')} className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="incharge_staff" /></span>
                                     </Form.Group>
                                     <Form.Group as={Col} sm="6" controlId="bank_name" xl={{ span: 4 }} ></Form.Group>
 
                                     <Form.Group as={Col} sm="6" controlId="bank_name" xl="4">
-                                        <Form.Label>Bank Name <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:bank-name')} </Form.Label>
                                         <Field name="bank_name" type="text" value={values.bank_name ?? ""}
                                             placeholder="Enter bank name" className="form-control" autoComplete='off'
                                         />
@@ -190,24 +189,24 @@ const AddCustomer = (props) => {
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" controlId="iban" xl="4">
-                                        <Form.Label>IBAN <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:iban')} </Form.Label>
                                         <Field name="iban" type="text" value={values.iban ?? ""}
-                                            placeholder="Enter IBAN" className="form-control" autoComplete='off'
+                                            placeholder="" className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="iban" /></span>
                                     </Form.Group>
 
                                     <Form.Group as={Col} sm="6" controlId="account_hldr_name" xl="4">
-                                        <Form.Label>Account Holder Name <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:account-holder-name')} </Form.Label>
                                         <Field name="account_hldr_name" type="text" value={values.account_hldr_name ?? ""}
-                                            placeholder="Enter account holder name" className="form-control" autoComplete='off'
+                                            placeholder="" className="form-control" autoComplete='off'
                                         />
                                         <span className="text-red" ><ErrorMessage name="account_hldr_name" /></span>
                                     </Form.Group>
 
 
                                     <Form.Group as={Col} xs="12" controlId="notes" >
-                                        <Form.Label>Notes <span className="text-red">*</span></Form.Label>
+                                        <Form.Label>{props.t('shorex:notes')} </Form.Label>
                                         <Field name="notes" as="textarea" value={values.notes ?? ""} rows="5"
                                             placeholder="Enter notes" className="form-control" autoComplete='off'
                                         />
@@ -216,13 +215,13 @@ const AddCustomer = (props) => {
 
 
                                     <Form.Group as={Col} xs="12" controlId="notes" >
-                                        <h4 className="heading mb-4">Media</h4>
+                                        <h4 className="heading mb-4">{props.t('shorex:media')}</h4>
 
                                     </Form.Group>
 
 
                                     <Form.Group as={Col} xl="4" sm="6" controlId="notes" >
-                                        <Form.Label>License Image <span className="text-red">{!id && ""} </span></Form.Label>
+                                        <Form.Label>{props.t('shorex:license-image')} <span className="text-red">{!id && ""} </span></Form.Label>
                                         <input id="file" name="license_img" className="form-control" type="file" onChange={(e) => {
                                             setFieldValue("license_img", e.currentTarget.files[0] ?? "");
                                         }} />
@@ -253,10 +252,10 @@ const AddCustomer = (props) => {
                                                         role="status"
                                                         aria-hidden="true"
                                                     />
-                                                    &nbsp; Submiting...
+                                                    &nbsp; {props.t('shorex:submitting')}...
                                                 </>
                                             ) : (
-                                                "Save"
+                                                props.t('shorex:save')
                                             )}
                                         </Button>
                                     </Form.Group>
@@ -286,4 +285,4 @@ const AddCustomer = (props) => {
     );
 };
 
-export default AddCustomer;
+export default withTranslation(['base', 'shorex'])(AddCustomer)

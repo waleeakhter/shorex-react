@@ -6,7 +6,7 @@ const routes = {
     path: "/reports",
     exact: true,
     component: Reports,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 };
 

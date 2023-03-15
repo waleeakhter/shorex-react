@@ -3,18 +3,20 @@ import Tabs from './../../../Common/Tabs/Tabs'
 import ClaimRewards from './ClaimRewards';
 import DailyPoints from './DailyPoints';
 import History from './History';
-const Rewards = () => {
+import {withTranslation} from 'react-i18next'
+
+const Rewards = (props) => {
   const tabs = [
     {
-      name: 'Claim Rewards',
+      name: props.t('claim-rewards'),
       component: <ClaimRewards />
     },
     {
-      name: 'Rewards History',
+      name: props.t('reward-history'),
       component: <History />
     },
     {
-      name: 'Daily Gained Points',
+      name: props.t('daily-gained-points'),
       component: <DailyPoints />
     }
   ]
@@ -32,4 +34,4 @@ const Rewards = () => {
   )
 }
 
-export default Rewards
+export default withTranslation(['shorex'])(Rewards)

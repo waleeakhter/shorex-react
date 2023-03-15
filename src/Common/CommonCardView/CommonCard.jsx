@@ -4,7 +4,10 @@ import edit from "./../../assets/images/edit.svg"
 import "./card.scss"
 import { OverlayTrigger, Tooltip, Button, } from "react-bootstrap"
 import { useHistory } from "react-router-dom"
+import {withTranslation} from 'react-i18next'
+
 const CommonCard = (props) => {
+    const currentUser=JSON.parse(localStorage.getItem('currentUser'))
     const history = useHistory()
     return (
 
@@ -14,7 +17,7 @@ const CommonCard = (props) => {
                 <div className={`customerCard ${props.view}`}
                     onClick={() => history.push(props.redirect ?? "#")}>
 
-                    <img src={props?.avatar?.url ?? placeholder} alt="" />
+                    <img src={props?.avatar ?? placeholder} alt="" />
 
                     <div className="text">
                         <OverlayTrigger placement="bottom-start" overlay={<Tooltip id="tooltip-name">{props.text1}</Tooltip>}>
@@ -25,23 +28,29 @@ const CommonCard = (props) => {
 
                     {!props.hide &&
                         <div className="buttons">
-                            <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip-edit">{'Edit'}</Tooltip>}>
+                            <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip-edit">{props.t('base:table-edit-btn')}</Tooltip>}>
                                 <Button onClick={(e) => {
-                                    e.stopPropagation();
-                                    history.push(props?.edit ?? "#")
-                                }} className="ms-auto" variant="">
-                                    <img src={edit} alt="edit-icon" className="" />
-                                </Button>
+                                e.stopPropagation();
+                                history.push(props?.edit ?? "#")
+                            }} className="ms-auto"  variant="">
+                              <img src={edit} alt="edit-icon" className="" />
+                            </Button>
                             </OverlayTrigger>
-                            <OverlayTrigger placement="right" className="danger" overlay={<Tooltip id="tooltip-delete">{'Delete'}</Tooltip>}>
-                                <Button variant="" onClick={(e) => {
-                                    e.stopPropagation();
-                                    props.delete()
-                                }}
-                                >
-                                    <i className="fa-solid fa-trash"></i>
-                                </Button>
+                            {
+                                    currentUser.roles.includes('Admin') &&
+                            <OverlayTrigger placement="right" className="danger" overlay={<Tooltip id="tooltip-delete">{props.t('base:table-delete-btn')}</Tooltip>}>
+                               
+
+                                    <Button variant="" onClick={(e) => {
+                                        e.stopPropagation();
+                                        props.delete()
+                                    }}
+                                    >
+                                        <i className="fa-solid fa-trash"></i>
+                                    </Button>
+                               
                             </OverlayTrigger>
+                             }
                         </div>
                     }
                 </div>}
@@ -49,4 +58,4 @@ const CommonCard = (props) => {
     )
 }
 
-export default CommonCard
+export default withTranslation(['base', 'shorex']) (CommonCard)

@@ -3,10 +3,10 @@ export default {
   Drivers: {
     _tag: 'CSidebarNavItem',
     name: 'Drivers',
-    phrase: 'Drivers & Vehicles',
+    phrase: 'nav-drivers-vehicles',
     to: '/lists',
     icon: 'fa-regular fa-steering-wheel',
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
     order:10,
   },
 }

@@ -10,44 +10,44 @@ const routes = {
     path: "/lists",
     exact: true,
     component: Lists,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   AddDriver: {
     path: "/lists/drivers/add",
     exact: true,
     component: AddDriver,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   EditDriver: {
     path: "/lists/drivers/:id/edit",
     exact: true,
     component: AddDriver,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   AddVehicles: {
     path: "/lists/vehicles/add",
     exact: true,
     component: AddVehicle,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   EditVehicles: {
     path: "/vehicles/:id/edit",
     exact: true,
     component: AddVehicle,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 
   Assign: {
     path: "/lists/driver/:id/assign-driver",
     exact: true,
     component: Assign,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   Profile: {
     path: "/lists/drivers/:id/profile",
     exact: true,
     component: Profile,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 
   

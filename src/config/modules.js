@@ -59,4 +59,10 @@ export default [
         status: true,
         order: 1,
       },
+      {
+        name: 'Settings',
+        component: require('./../Modules/Settings'),
+        status: true,
+        order: 1,
+      },
 ];

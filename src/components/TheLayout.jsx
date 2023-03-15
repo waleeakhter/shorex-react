@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Helper, ErrorBoundary, TheContent, TheSidebar, TheAside, TheFooter } from '@evenlogics/whf-ra-components';
 import TheHeader from './Header/Header';
-
+import { AppProvider } from '../Context';
 const TheLayout = (props) => {
-
+   
     const classes = classNames('c-app c-default-layout');
     const [internalActive, setInternalActive] = useState(' internal-disabled');
     const [promotionActive, setPromotionActive] = useState(' promotion-disabled');
@@ -26,7 +26,8 @@ const TheLayout = (props) => {
     }, [])
 
     return (
-        <div className={classes + internalActive + promotionActive}>
+        <AppProvider>
+            <div className={classes + internalActive + promotionActive}>
             {
                 JSON.parse(localStorage.getItem('currentUser')) && <TheSidebar />
             }
@@ -43,6 +44,8 @@ const TheLayout = (props) => {
                 <TheFooter />
             </div >
         </div >
+        </AppProvider>
+        
     );
 };
 

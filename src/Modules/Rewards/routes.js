@@ -6,7 +6,7 @@ const routes = {
     path: "/rewards",
     exact: true,
     component: Rewards,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
 };
 

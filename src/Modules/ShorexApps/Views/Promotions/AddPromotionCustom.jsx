@@ -3,6 +3,7 @@ import { Col, Row, Form, Button } from "react-bootstrap";
 import { Formik, Field, ErrorMessage } from "formik";
 import { initialValues } from "./js/IntialValues"
 import { validationSchema } from "./js/validationSchema"
+import {withTranslation} from 'react-i18next'
 
 const AddPromotion = (props) => {
   const onSubmit = (values) => {
@@ -38,12 +39,12 @@ const AddPromotion = (props) => {
             </Form.Group>
             <Form.Group as={Col} xs="12" xl="10" controlId="description" className="form-group"
             >
-              <Form.Label>Coupon title (ar)</Form.Label>
+              <Form.Label>{props.t('shorex:coupon-title')}</Form.Label>
               <Field
                 as="textarea"
                 name="description"
                 value={values.description}
-                placeholder="Enter coupon title"
+                placeholder={props.t('shorex:enter-coupon-title')}
                 className="form-control"
                 rows="5"
               />
@@ -54,12 +55,12 @@ const AddPromotion = (props) => {
 
             <Form.Group as={Col} md="6" xl="4" controlId="promo_image" className="form-group"
             >
-              <Form.Label>Product Image *</Form.Label>
+              <Form.Label>{props.t('shorex:product-image')} *</Form.Label>
               <Field
                 name="promo_image"
                 type="file"
                 value={values.promo_image}
-                placeholder="Enter coupon detail"
+                placeholder={props.t('shorex:enter-coupon-detail')}
                 className="form-control"
               />
               <div className="text-red mt-2">
@@ -69,12 +70,11 @@ const AddPromotion = (props) => {
 
             <Form.Group as={Col} md="6" xl="4" controlId="promo_image" className="form-group"
             >
-              <Form.Label>Product Image *</Form.Label>
+              <Form.Label>{props.t('shorex:product-image')} *</Form.Label>
               <Field
                 name="promo_image"
                 type="file"
                 value={values.promo_image}
-                placeholder="Enter coupon detail"
                 className="form-control"
               />
               <div className="text-red mt-2">
@@ -84,7 +84,7 @@ const AddPromotion = (props) => {
 
 
             <div className="from-group w-100 text-end">
-              <Button type="submit" variant='dark' size="lg"> Next </Button>
+              <Button type="submit" variant='dark' size="lg"> {props.t('general-next')} </Button>
             </div>
 
           </Row>
@@ -109,4 +109,4 @@ const AddPromotion = (props) => {
   )
 }
 
-export default AddPromotion
+export default withTranslation(['base', 'shorex'])(AddPromotion)

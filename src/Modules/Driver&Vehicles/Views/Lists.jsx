@@ -7,7 +7,7 @@ import VehiclesList from './Vehicles/VehiclesList'
 import ToggleButtons from '../../../Common/ToggleButtons/ToggleButtons'
 import Tabs from '../../../Common/Tabs/Tabs'
 import Wrapper from '../../Helper/Wrapper';
-
+import {withTranslation} from 'react-i18next'
 
 const List = (props) => {
   const [view, setView] = React.useState('list')
@@ -18,15 +18,16 @@ const List = (props) => {
   // tabs
   const tabs = [
     {
-      name: 'Drivers',
+      name: props.t('shorex:drivers'),
       component: <ListView view={view} Filters={DriverFilters}
+      deleteTarget="users"
         target="drivers" filterShow={filterShow}
         hide={requests ? true : false}
         edit={'lists/drivers'}
         redirect={requests ? "/lists/driver/:id/assign-driver" : "/lists/drivers/:id/profile"}
       />
     },
-    !requests && { name: 'Vehicles', component: <VehiclesList /> }
+    !requests && { name: props.t('shorex:vehicles'), component: <VehiclesList /> }
   ]
   const [key, setKey] = React.useState(tabs.at(0).name);
 
@@ -61,12 +62,12 @@ const List = (props) => {
           <div className={`d-flex align-items-center justify-content-end`} style={{ gap: 20 }}>
             {key === "Drivers" && <ToggleButtons changeView={changeView} />}
             {!requests && <Button variant="success" className="btn-add" onClick={() => props.history.push(`${key === "Vehicles" ? '/lists/vehicles/add' : `/lists/drivers/add`}`)}>
-              Add {key === "Vehicles" ? 'Vehicle' : `Driver`}
+              {key === "Vehicles" ? props.t('shorex:add-vehicle') : props.t('shorex:add-driver')}
             </Button>}
             {key === "Drivers" && <Button variant="" className="btn-filter"
               onClick={() => {
                 setFilterShow(!filterShow);
-              }} >Filters</Button>}
+              }} >{props.t('general-filters')}</Button>}
           </div>
         </Col>
 
@@ -84,4 +85,4 @@ const List = (props) => {
   )
 }
 
-export default List 
+export default withTranslation(['base', 'shorex'])(List)

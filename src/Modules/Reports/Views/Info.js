@@ -23,32 +23,32 @@ import coloricon4 from './../../../assets/images/coloricon4.svg'
 
 
 export const dashboardCards = [
-    {image : dashicon1 , text : 'Customer Recycle Requests'},
-    {image : dashicon2 , text : 'The Rewards'},
-    {image : dashicon3 , text : 'Unsuccessful Requests'},
-    {image : dashicon4 , text : 'Reports'},
-    {image : dashicon5 , text : 'Stock'},
-    {image : dashicon1 , text : 'Customers'},
-    {image : dashicon6 , text : 'Warehouse'},
-    {image : dashicon6 , text : 'Drivers & Vehicles'},
-    {image : dashicon7 , text : 'Data Entry Staff'},
-    {image : dashicon8 , text : 'Settings'},
+    {image : dashicon1 , text : 'customer-recycle-request'},
+    {image : dashicon2 , text : 'the-rewards'},
+    {image : dashicon3 , text : 'unsuccessful-requests'},
+    {image : dashicon4 , text : 'reports'},
+    {image : dashicon5 , text : 'stock'},
+    {image : dashicon1 , text : 'shorex-customer'},
+    {image : dashicon6 , text : 'wharehouse'},
+    {image : dashicon6 , text : 'drivers-vehicles'},
+    {image : dashicon7 , text : 'data-entry-staff'},
+    {image : dashicon8 , text : 'shorex-settings'},
 ]
 
 export const shorexApps = [
-    {image : dashicon9 , text : 'Notifications'},
-    {image : dashicon10 , text : 'Products'},
-    {image : dashicon11 , text : 'Promotions'},
-    {image : dashicon12 , text : 'Manage Privacy Policy'},
-    {image : dashicon13 , text : 'Manage Terms & Conditions'},
-    {image : dashicon14 , text : 'Manage Popup Message'},
-    {image : dashicon15 , text : 'Manage Business Categories'},
-    {image : dashicon16 , text : 'Manage Rewards Points'},
+    {image : dashicon9 , text : 'shorex-notifications'},
+    {image : dashicon10 , text : 'shorex-products'},
+    {image : dashicon11 , text : 'shorex-promotions'},
+    {image : dashicon12 , text : 'manage-privacy-policy'},
+    {image : dashicon13 , text : 'manage-terms'},
+    {image : dashicon14 , text : 'manage-popup'},
+    {image : dashicon15 , text : 'manage-business'},
+    {image : dashicon16 , text : 'manage-rewards'},
 ]
 
 export const colorCards = [
-    {image : coloricon1 , text : 'Customer Available Rewards' , text2: '25960' , bg : "var(--pink)"},
-    {image : coloricon2 , text : 'Claimed Rewards' , text2: '55961',bg : "var(--green)"},
-    {image : coloricon3 , text : 'Total Numbers Of Customers' , text2: '42342',bg : "var(--blueCard)"},
-    {image : coloricon4 , text : 'Total Donated Rewards' , text2: '42342',bg : "var(--purple)"},
+    {image : coloricon1 , text : 'customer-available' , text2: '25960' , bg : "var(--pink)"},
+    {image : coloricon2 , text : 'claimed-rewards' , text2: '55961',bg : "var(--green)"},
+    {image : coloricon3 , text : 'total-num-customers' , text2: '42342',bg : "var(--blueCard)"},
+    {image : coloricon4 , text : 'total-donated-rewards' , text2: '42342',bg : "var(--purple)"},
 ]

@@ -7,13 +7,13 @@ const routes = {
     path: "/customer-request",
     exact: true,
     component: CustomerRequest,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   CustomerRequestDetail: {
     path: "/customer-request/:id/details",
     exact: true,
     component: CustomerRequestDetail,
-    roles: ['Admin'],
+   roles: ['Admin','Sub Admin'],
   },
   
 };

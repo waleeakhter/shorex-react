@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { validationSchema } from "./JS/schema"
 import initialValues from "./JS/intialvalues"
 import { onSubmit, getVehicles, handleInputChange, handleFileChange, deleteImage } from "./JS/genric"
-
+import {withTranslation} from 'react-i18next'
 
 const AddVehicle = (props) => {
 
@@ -61,11 +61,11 @@ const AddVehicle = (props) => {
                         {({ resetForm, values, errors, touched, setFieldValue, handleSubmit }) => (
                             <form onSubmit={handleSubmit}>
                                 <Row className="mb-3" style={{ gap: "15px 0" }}>
-                                    <h4 className="heading col-12">{id ? "Edit" : "Add"} Vehicle</h4>
+                                    <h4 className="heading col-12">{id ? props.t('shorex:edit-vehicle') : props.t('shorex:add-vehicle')}</h4>
                                     <Form.Group as={Col} lg="4" sm="6" controlId="name" className="form-group"
                                     >
-                                        <Form.Label>Vehicle Name *</Form.Label>
-                                        <Form.Control autoComplete="off" type="text" placeholder="Enter vehicle Name"
+                                        <Form.Label>{props.t('shorex:vehicle-name')} *</Form.Label>
+                                        <Form.Control autoComplete="off" type="text" placeholder=""
                                             name="name" defaultValue={values.name}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -78,8 +78,8 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} lg="4" sm="6" controlId="reg_no" className="form-group"
                                     >
-                                        <Form.Label>Vehicle Number *</Form.Label>
-                                        <Form.Control autoComplete="off" type="text" placeholder="Enter vehicle Name"
+                                        <Form.Label>{props.t('shorex:vehicle-number')} *</Form.Label>
+                                        <Form.Control autoComplete="off" type="text" placeholder=""
                                             name="reg_no" defaultValue={values.reg_no}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -93,8 +93,8 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} lg="4" sm="6" controlId="trade_mark" className="form-group"
                                     >
-                                        <Form.Label>Trade Mark *</Form.Label>
-                                        <Form.Control autoComplete="off" type="text" placeholder="Enter vehicle Name"
+                                        <Form.Label>{props.t('shorex:trade-mark')} *</Form.Label>
+                                        <Form.Control autoComplete="off" type="text" placeholder=""
                                             name="trade_mark" defaultValue={values.trade_mark}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -107,8 +107,8 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} lg="4" sm="6" controlId="chassis_no" className="form-group"
                                     >
-                                        <Form.Label>Chassis Number *</Form.Label>
-                                        <Form.Control autoComplete="off" type="text" placeholder="Enter vehicle Name"
+                                        <Form.Label>{props.t('shorex:chasis-number')} *</Form.Label>
+                                        <Form.Control autoComplete="off" type="text" placeholder=""
                                             name="chassis_no" defaultValue={values.chassis_no}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -121,8 +121,8 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} lg="4" sm="6" controlId="engine_no" className="form-group"
                                     >
-                                        <Form.Label>Engine Number *</Form.Label>
-                                        <Form.Control autoComplete="off" type="text" placeholder="Enter vehicle Name"
+                                        <Form.Label>{props.t('shorex:engine-number')} *</Form.Label>
+                                        <Form.Control autoComplete="off" type="text" placeholder=""
                                             name="engine_no" defaultValue={values.engine_no}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -136,8 +136,8 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} lg="4" sm="6" controlId="model" className="form-group"
                                     >
-                                        <Form.Label>Model *</Form.Label>
-                                        <Form.Control autoComplete="off" type="text" placeholder="Enter vehicle Name"
+                                        <Form.Label>{props.t('shorex:model')} *</Form.Label>
+                                        <Form.Control autoComplete="off" type="text" placeholder=""
                                             name="model" defaultValue={values.model}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -150,7 +150,7 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} lg="4" sm="6" controlId="reg_doc" className="form-group"
                                     >
-                                        <Form.Label>Upload Registration Documents *</Form.Label>
+                                        <Form.Label>{props.t('shorex:upload-registration-documents')} *</Form.Label>
                                         <Form.Control autoComplete="off" type="file" placeholder="Enter vehicle Name" multiple
                                             name="reg_doc" defaultValue={values.reg_doc} accept=".pdf"
                                             onClick={e => e.target.value = null}
@@ -165,7 +165,6 @@ const AddVehicle = (props) => {
                                     >
                                         <div className="d-flex flex-wrap" style={{ gap: 15 }}>
                                             {files?.length > 0 && files.map((file, i) => {
-                                                console.log(file)
                                                 let link = file.url ?? URL.createObjectURL(file)
                                                 return <div className="ratio ratio-1x1 position-relative" key={i.toString()} style={{ flex: "0 0 150px" }}>
                                                     <i className="fa-solid fa-trash deleteIcon" onClick={() => deleteImage(i, setFieldValue, files)}></i>
@@ -190,8 +189,8 @@ const AddVehicle = (props) => {
 
                                     <Form.Group as={Col} xs="12" controlId="notes" className="form-group"
                                     >
-                                        <Form.Label>Notes *</Form.Label>
-                                        <Form.Control autoComplete="off" as="textarea" rows={5} placeholder="Enter some notes"
+                                        <Form.Label>{props.t('shorex:notes')} </Form.Label>
+                                        <Form.Control autoComplete="off" as="textarea" rows={5} placeholder=""
                                             name="notes" defaultValue={values.notes}
                                             onChange={(e) => {
                                                 handleInputChange(e, setFieldValue);
@@ -220,7 +219,7 @@ const AddVehicle = (props) => {
                                                 &nbsp; Submiting...
                                             </>
                                         ) : (
-                                            "Submit"
+                                            props.t('base:general-submit')
                                         )}
                                     </Button>
                                     <Button
@@ -232,10 +231,10 @@ const AddVehicle = (props) => {
                                             setTimeout(() => { setLoader(false) }, 1000)
                                         }}
                                     >
-                                        Reset
+                                      { props.t('base:general-reset')}
                                     </Button>
                                 </Form.Group>
-                                {true && (
+                                {false && (
                                     <div className={"row"}>
                                         <div className={"col-12"}>
                                             <code>
@@ -258,4 +257,5 @@ const AddVehicle = (props) => {
         </div>
     );
 };
-export default AddVehicle;
+
+export default withTranslation(['base', 'shorex'])(AddVehicle)

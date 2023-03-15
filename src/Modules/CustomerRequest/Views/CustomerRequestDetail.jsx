@@ -5,7 +5,7 @@ import './CustomerRequest.scss'
 import ProductsList from './ProductsList'
 import Api from '@evenlogics/whf-api'
 import { toast } from "react-toastify"
-
+import {withTranslation} from 'react-i18next'
 
 const CustomerDetail = (props) => {
   const { id } = props.match.params;
@@ -27,9 +27,9 @@ const CustomerDetail = (props) => {
   return (
     <Row>
       <Col xl="8" >
-        <h4 className="heading mb-4">Recent Requests</h4>
+        <h4 className="heading mb-4">{props.t('shorex:recent-requests')}</h4>
         {!spinner ?
-          <ProductsList requests={requests} /> 
+          <ProductsList requests={requests} />
           :
           <div className="text-center py-5">
             <Spinner animation="border" />
@@ -43,4 +43,4 @@ const CustomerDetail = (props) => {
   )
 }
 
-export default CustomerDetail
+export default withTranslation(['base', 'shorex'])(CustomerDetail)
